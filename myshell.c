@@ -109,6 +109,12 @@ int main(int argc, char *argv[]) {
          command.argv[0] = "rm";
      }
 
+     if (strcmp(command.name, "W") == 0)
+     {
+         command.name = "clear";
+         command.argv[0] = "clear";
+     }
+
       /* Create a child process to execute the command */
       if ((pid = fork()) == 0) {
          /* Child executing command */
