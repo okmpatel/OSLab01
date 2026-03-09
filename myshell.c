@@ -73,6 +73,11 @@ int main(int argc, char *argv[]) {
 		 either execute it directly or build a new command structure to
 		 execute next
 	  */
+     if (strcmp(command.name, "Q") == 0)
+     {
+         printf("Quiting");
+         exit(0);
+     }
 	  
       /* Create a child process to execute the command */
       if ((pid = fork()) == 0) {
