@@ -68,6 +68,10 @@ int main(int argc, char *argv[]) {
       /* Read the command line and parse it */
       readCommand(cmdLine);
       parseCommand(cmdLine, &command);
+      if(command.argc == 0)
+      {
+         continue;
+      }
       command.argv[command.argc] = NULL;
 
 	  /*
@@ -79,6 +83,16 @@ int main(int argc, char *argv[]) {
      {
          printf("Quiting");
          exit(0);
+     }
+
+     if (strcmp(command.name,"E") == 0)
+     {
+         for(int i= 1; i < command.argc; i++)
+         {
+            printf("%s", command.argv[i]);
+         }
+         printf("\n");
+         continue;
      }
 	  
       /* Create a child process to execute the command */
