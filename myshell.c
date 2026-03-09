@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
    char cmdLine[MAX_LINE_LEN];
    struct command_t command;
 
-   while (TRUE) {
+   while (true) {
       printPrompt();
       /* Read the command line and parse it */
       readCommand(cmdLine);
@@ -133,7 +133,7 @@ void printPrompt() {
    /* Build the prompt string to have the machine name,
     * current directory, or other desired information
     */
-   promptString = ...;
+   auto promptString = ...;
    printf("%s ", promptString);
 }
 
