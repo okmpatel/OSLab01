@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
 	  */
      if (strcmp(command.name, "Q") == 0)
      {
-         printf("Quiting");
+         printf("Quitting\n");
          exit(0);
      }
 
