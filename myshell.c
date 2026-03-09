@@ -68,10 +68,6 @@ int main(int argc, char *argv[]) {
       /* Read the command line and parse it */
       readCommand(cmdLine);
       parseCommand(cmdLine, &command);
-      if(command.argc == 0)
-      {
-         continue;
-      }
       command.argv[command.argc] = NULL;
 
 	  /*
@@ -94,6 +90,15 @@ int main(int argc, char *argv[]) {
          printf("\n");
          continue;
      }
+
+     if (strcmp(command.name, "M") == 0)
+     {
+         command.name = "nano";
+         command.argv[0] = "nano";
+         continue;
+     }
+
+     
 	  
       /* Create a child process to execute the command */
       if ((pid = fork()) == 0) {
