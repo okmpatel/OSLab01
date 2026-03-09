@@ -98,7 +98,11 @@ int main(int argc, char *argv[]) {
          continue;
      }
 
-     
+     if (strcmp(command.name, "C") == 0)
+     {
+         command.name = "cp";
+         command.argv[0] = "cp";
+     }
 	  
       /* Create a child process to execute the command */
       if ((pid = fork()) == 0) {
