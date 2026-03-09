@@ -95,7 +95,6 @@ int main(int argc, char *argv[]) {
      {
          command.name = "nano";
          command.argv[0] = "nano";
-         continue;
      }
 
      if (strcmp(command.name, "C") == 0)
@@ -103,7 +102,13 @@ int main(int argc, char *argv[]) {
          command.name = "cp";
          command.argv[0] = "cp";
      }
-	  
+
+      if (strcmp(command.name, "D") == 0)
+     {
+         command.name = "rm";
+         command.argv[0] = "rm";
+     }
+
       /* Create a child process to execute the command */
       if ((pid = fork()) == 0) {
          /* Child executing command */
