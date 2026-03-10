@@ -111,14 +111,20 @@ int main(int argc, char *argv[]) {
 
      if (strcmp(command.name, "W") == 0)
      {
-         system("clear");
-         continue;
+         command.name = "clear";
+         command.argv[0] = "clear";
      }
 
-     if (strcmp(command.name, "P"))
+     if (strcmp(command.name, "P") == 0)
      {
          command.name = "more";
          command.argv[0] = "more";
+     }
+
+     if (strcmp(command.name, "X") == 0)
+     {
+         command.name = command.argv[1];
+         command.argv[0] = command.argv[1];
      }
 
       /* Create a child process to execute the command */
