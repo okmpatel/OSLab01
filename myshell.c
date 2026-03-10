@@ -19,7 +19,7 @@
 //
 //
 //
-// Signed:_____________________________________ Date:_____________
+// Signed:______________Om Patel_______________________ Date:_____________
 
 // 3460:426 Lab 1 - Basic C shell rev. 9/10/2020
 
@@ -56,6 +56,7 @@ struct command_t {
 int parseCommand(char *, struct command_t *);
 void printPrompt();
 void readCommand(char *);
+void commandExecution(struct command_t command);
 
 int main(int argc, char *argv[]) {
    int pid;
@@ -75,85 +76,21 @@ int main(int argc, char *argv[]) {
 		 either execute it directly or build a new command structure to
 		 execute next
 	  */
-     if (strcmp(command.name, "Q") == 0)
-     {
+
+      // check if shortcut for quit was entered using "Q"
+      if (strcmp(command.name, "Q") == 0)
+      {
          printf("Quitting\n");
          break;
-     }
-
-     if (strcmp(command.name,"E") == 0)
-     {
-         for(int i= 1; i < command.argc; i++)
-         {
-            printf("%s", command.argv[i]);
-         }
-         printf("\n");
-         continue;
-     }
-
-     if (strcmp(command.name, "M") == 0)
-     {
-         command.name = "nano";
-         command.argv[0] = "nano";
-     }
-
-     if (strcmp(command.name, "C") == 0)
-     {
-         command.name = "cp";
-         command.argv[0] = "cp";
-     }
-
-      if (strcmp(command.name, "D") == 0)
-     {
-         command.name = "rm";
-         command.argv[0] = "rm";
-     }
-
-     if (strcmp(command.name, "W") == 0)
-     {
-         command.name = "clear";
-         command.argv[0] = "clear";
-     }
-
-     if (strcmp(command.name, "P") == 0)
-     {
-         command.name = "more";
-         command.argv[0] = "more";
-     }
-
-     if (strcmp(command.name, "X") == 0)
-     {
-         command.name = command.argv[1];
-         command.argv[0] = command.argv[1];
-     }
-
-     if (strcmp(command.name, "L") == 0)
-     {
-         const char* cwd = getcwd(NULL, 1024);
-         printf("\n%s\n", cwd);
-         command.argv[1] = (char*)"-l";
-         execvp("ls", command.argv);
-     }
-
-     if (strcmp(command.name, "H") == 0)
-     {
-         printf("\n");
-         printf("C file1 file2 ------- Copy; create file2, copy all bytes of file1 to file2 without deleting file1.\n");
-         printf("D file        ------- Delete the named file.\n");
-         printf("E comment     ------- comment Echo; display comment on screen followed by a new line (multiple spaces/tabs may be reduced to a single space)\n");
-         printf("H             ------- Help; display the user manual\n");
-         printf("L             ------- List the contents of the current directory\n");
-         printf("M file        ------- Make; create the named text file by launching a text editor\n");
-         printf("P file        ------- Print; display the contents of the named file on screen.\n");
-         printf("Q             ------- Quit the shell.\n");
-         printf("W             ------- Wipe; clear the screen.\n");
-         printf("X program     ------- Execute the named program.n\n\n");
-         continue;
-     }
+      }
 
       /* Create a child process to execute the command */
       if ((pid = fork()) == 0) {
          /* Child executing command */
+
+         //Function call to check if it is a shortcut
+         commandExecution(command);
+
          execvp(command.name, command.argv);
       }
       /* Wait for the child to terminate */
@@ -217,6 +154,79 @@ void readCommand(char *buffer) {
     * but it does the job.
     */
    fgets(buffer, 80, stdin);
+}
+
+// check if the user enter one of the shell shortcut commands, and execute them
+void commandExecution(struct command_t command)
+{
+   //check if shortcut for echo was entered using "E"
+   if (strcmp(command.name,"E") == 0)
+   {
+      execvp("echo", command.argv);
+   }
+
+   //check if shortcut for nano was entered using "M"
+   if (strcmp(command.name, "M") == 0)
+   {
+      execvp("nano", command.argv);
+   }
+
+   //check if shortcut for copy was entered using "C"
+   if (strcmp(command.name, "C") == 0)
+   {
+      execvp("cp", command.argv);
+   }
+
+   // check if shortcut for delete was entered using "D"
+   if (strcmp(command.name, "D") == 0)
+   {
+      execvp("rm", command.argv);
+   }
+
+   // check if shortcut for wipe was entered using "W"
+   if (strcmp(command.name, "W") == 0)
+   {
+      execvp("clear", command.argv);
+   }
+
+   // check if shortcut for print was entered using "P"
+   if (strcmp(command.name, "P") == 0)
+   {
+      execvp("more", command.argv);
+   }
+
+   // check if shortcut for execute was entered using "X"
+   if (strcmp(command.name, "X") == 0)
+   {
+      execvp(command.argv[1], command.argv);
+   }
+
+   // check if shortcut for list was entered using "L"
+   if (strcmp(command.name, "L") == 0)
+   {
+      const char* cwd = getcwd(NULL, 1024);
+      printf("\n%s\n", cwd);
+      command.argv[1] = (char*)"-l";
+      execvp("ls", command.argv);
+   }
+
+   // check if shortcut for help was entered using "H"
+   if (strcmp(command.name, "H") == 0)
+   {
+      printf("\n");
+      printf("C file1 file2-------- Copy; create file2, copy all bytes of file1 to file2 without deleting file1.\n");
+      printf("D file--------------- Delete the named file.\n");
+      printf("E comment------------ Echo; display comment on screen followed by a new line (multiple spaces/tabs may be reduced to a single space)\n");
+      printf("H-------------------- Help; display the user manual\n");
+      printf("L-------------------- List the contents of the current directory\n");
+      printf("M file--------------- Make; create the named text file by launching a text editor\n");
+      printf("P file--------------- Print; display the contents of the named file on screen.\n");
+      printf("Q-------------------- Quit the shell.\n");
+      printf("W-------------------- Wipe; clear the screen.\n");
+      printf("X program------------ Execute the named program.\n");
+      printf("\n");
+   }
+
 }
 
 /* End printPrompt and readCommand */
