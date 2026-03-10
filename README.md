@@ -22,8 +22,8 @@ Available commands:
 - D file -----------------Delete the named file.
 - E comment ---------- Echo; display comment on screen followed by a new line (multiple
 spaces/tabs may be reduced to a single space)
-- H ---------------------Help; display the user manual, described below.
-- L ----------------------List the contents of the current directory; see below.
+- H ---------------------Help; display the user manual.
+- L ----------------------List the contents of the current directory.
 - M file -----------------Make; create the named text file by launching a text editor.
 - P file -----------------Print; display the contents of the named file on screen.
 - Q --------------------Quit the shell.
@@ -55,4 +55,3 @@ commandExecution()
 - lecture notes.
 - https://www.geeksforgeeks.org/c/exec-family-of-functions-in-c/
 - https://www.geeksforgeeks.org/c/making-linux-shell-c/
-- https://brennan.io/2015/01/16/write-a-shell-in-c/
