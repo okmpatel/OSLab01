@@ -1,7 +1,5 @@
 ## 1. How to compile and run the shell
 
----
-
 Step 1: Open a terminal
 
 Step 2: Compile the program using the GCC
@@ -12,7 +10,7 @@ Step 3: Run the compiled shell program:
 
 ./myshell
 
-You can now begin entering commands.
+You can entering commands now.
 
 ## 2. How to use the shell
 
@@ -38,9 +36,7 @@ A command can be typed out like:
 - linux(op20)|>C file1.txt file2.txt
 - linux(op20)|>L
 
-3. FUNCTIONS USED IN THE SHELL
-
----
+## 3. Funciton used in the shell
 
 parseCommand()
 -Parses the user input into tokens and builds the argument array (argv) used for command execution.
@@ -54,9 +50,7 @@ readCommand()
 commandExecution()
 -Checks if the entered command is one of the shortcut commands and executes the corresponding Linux command using execvp().
 
-4. RESOURCES USED
-
----
+## 4. Resources used
 
 - lecture notes.
 - https://www.geeksforgeeks.org/c/exec-family-of-functions-in-c/
