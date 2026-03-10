@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
      if (strcmp(command.name, "Q") == 0)
      {
          printf("Quitting\n");
-         exit(0);
+         break;
      }
 
      if (strcmp(command.name,"E") == 0)
@@ -111,8 +111,14 @@ int main(int argc, char *argv[]) {
 
      if (strcmp(command.name, "W") == 0)
      {
-         command.name = "clear";
-         command.argv[0] = "clear";
+         system("clear");
+         continue;
+     }
+
+     if (strcmp(command.name, "P"))
+     {
+         command.name = "more";
+         command.argv[0] = "more";
      }
 
       /* Create a child process to execute the command */
