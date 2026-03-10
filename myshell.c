@@ -127,6 +127,30 @@ int main(int argc, char *argv[]) {
          command.argv[0] = command.argv[1];
      }
 
+     if (strcmp(command.name, "L") == 0)
+     {
+         const char* cwd = getcwd(NULL, 1024);
+         printf("\n%s\n", cwd);
+         command.argv[1] = (char*)"-l";
+         execvp("ls", command.argv);
+     }
+
+     if (strcmp(command.name, "H") == 0)
+     {
+         printf("\n");
+         printf("C file1 file2 ------- Copy; create file2, copy all bytes of file1 to file2 without deleting file1.\n");
+         printf("D file        ------- Delete the named file.\n");
+         printf("E comment     ------- comment Echo; display comment on screen followed by a new line (multiple spaces/tabs may be reduced to a single space)\n");
+         printf("H             ------- Help; display the user manual\n");
+         printf("L             ------- List the contents of the current directory\n");
+         printf("M file        ------- Make; create the named text file by launching a text editor\n");
+         printf("P file        ------- Print; display the contents of the named file on screen.\n");
+         printf("Q             ------- Quit the shell.\n");
+         printf("W             ------- Wipe; clear the screen.\n");
+         printf("X program     ------- Execute the named program.n\n\n");
+         continue;
+     }
+
       /* Create a child process to execute the command */
       if ((pid = fork()) == 0) {
          /* Child executing command */
